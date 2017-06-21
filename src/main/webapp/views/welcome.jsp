@@ -22,7 +22,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
 </head>
-<body onload='document.f.username.focus();'>
+<body >
 
 	<h1>Welcome</h1>
 		
@@ -40,7 +40,11 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('USER')">
-		<a href="persons/${pageContext.request.userPrincipal.name}"> Update Profile</a>
+	<td><form action="userProfile/" method="post">
+				<input type="hidden" name="email" value="${pageContext.request.userPrincipal.name}"/>
+							<input type="submit" value="Update Profile">
+			</form></td>
+		<%-- <a href="userProfile/${pageContext.request.userPrincipal.name}"> Update Profile</a> --%>
 	</security:authorize>
 	<table
 		class="table table-striped, table table-hover table table-condensed table-bordered">
@@ -54,7 +58,7 @@
 				<th colspan="2">Action</th>
 			</security:authorize>
 			<security:authorize access="hasRole('USER')">
-				<th colspan="1">Action</th>
+				<th colspan="2">Action</th>
 			</security:authorize>
 
 		</tr>
@@ -66,14 +70,17 @@
 				<td>${product.price}</td>
 				<td>${product.description}</td>
 				<td>${product.productType}</td>
-				<security:authorize access="hasRole('ADMIN')">
-					<td><a href="matchs/${match.id}">edit</a></td>
-					<td><form action="/delmatchs/${match.id}" method="post">
+				<security:authorize access="hasRole('ADMIN')">					
+					<td><form action="/editProduct/${product.id}" method="post">
+							<input type="submit" value="edit">
+						</form></td>
+						
+					<td><form action="/deleteProduct/${product.id}" method="post">
 							<input type="submit" value="delete">
 						</form></td>
 				</security:authorize>
 				<security:authorize access="hasRole('USER')">
-					<td><a href="stadiumsInfo/${match.stadium}">place Order</a></td>
+					<td><a href="/placeOrder/${product.id}">place Order</a></td>
 				</security:authorize>
 			</tr>
 		</c:forEach>

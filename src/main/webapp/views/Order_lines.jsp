@@ -38,45 +38,37 @@
 		<tr>
 
 			<th>Id</th>
-			<th>Order</th>
+			<th>Order Id</th>
+			<th>customer Name</th>
 			<th>Product</th>
 			<th>Quantity</th>	
-
+            <th>Price</th>
 		</tr>
 		<c:forEach var="order_line" items="${order_lines}">
 
 			<tr>
-				<td>${order_line.id}</td>	<!-- order id -->			
-				 <td><div class="dropdown">   <!-- order  -->
-						<p><p>${order_line.order.date}</p>
-						<div class="dropdown-content">               
-                <p>${order_line.order.person.firstName}</p>  
-                <p>orderLines</p>                                     
-                </div>
-					</div>
-				<td>
-				<div class="dropdown">     <!-- person -->
-						<p><p>${order_line.person.firstName}</p>
-						<div class="dropdown-content">               
-                        <p>${order_line.person.lasttName}</p>  
-                        <p>${order_line.person.phone}</p> 
-                        <p>${order_line.person.email}</p>
-                        <p>${order_line.person.address.city}</p>
-                        <p>${order_line.person.address.state}</p>
-                        <p>${order_line.person.address.country}</p>
-                        <p>${order_line.person.address.zipcode}</p>                                    
-                </div></div></td>					
-				<td>${order_line.quantity}</td> <!-- quantity -->
+				<td>${order_line.id}</td>	<!-- order id -->				    
+				<td>${order_line.order.id}</td>				               
+                <td>${order_line.order.person.firstName}</td>
+				
 				    <td><div class="dropdown">   <!-- product  -->
 						<p><p>${order_line.product.productName}</p>
 						<div class="dropdown-content">               
-                        <p>${order_line.product.price}</p> 
+                        
                         <p>${order_line.product.productType}</p>
                         <p>${order_line.product.description}</p>                                                     
                 </div>
-					</div></td>         
-				
+					</div></td> 
+					<td>${order_line.quantity}</td> <!-- quantity -->  
+					<td>${order_line.product.price}</td>      
+				</tr>
                 </c:forEach>
+                <tr>
+                <td colspan="4">Total</td>
+                 <td>${totalQuantity}</td>
+                <td >${totalPrice}</td>
+               
+                </tr>
             	</table>
 </body>
 </html>

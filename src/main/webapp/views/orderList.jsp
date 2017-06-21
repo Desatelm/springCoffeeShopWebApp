@@ -37,8 +37,8 @@
 		class="table table-striped, table table-hover table table-condensed table-bordered">
 		<tr>
 
-			<th>Id</th>
-			<th>Order</th>
+			<th>Order Id</th>
+			<th>Order Date</th>
 			<th>Product</th>
 			<th>Quantity</th>	
 
@@ -46,21 +46,22 @@
 		<c:forEach var="order" items="${orders}">
 
 			<tr>
-				<td>${order.id}</td>	<!-- order id -->
+				<td>${order.id}</td>	                         <!-- order id -->
 				<td>${order.orderDate}</td>			
-				 <td> <a href= "">${order.orderLines}</a></td>
+				 <td> <a href= "orderLine/${order.id}">orderLines</a></td>				 
 				<td>
-				<div class="dropdown">     <!-- person -->
-						<p><p>${order_line.person.firstName}</p>
+				<div class="dropdown">                          <!-- person -->
+						<p><p>${order.person.firstName}</p>
 						<div class="dropdown-content">               
-                        <p>${order_line.person.lasttName}</p>  
-                        <p>${order_line.person.phone}</p> 
-                        <p>${order_line.person.email}</p>
-                        <p>${order_line.person.address.city}</p>
-                        <p>${order_line.person.address.state}</p>
-                        <p>${order_line.person.address.country}</p>
-                        <p>${order_line.person.address.zipcode}</p>                                    
-                </div></div></td>				       
+                        <p>${order.person.lastName}</p>  
+                        <p>${order.person.phone}</p> 
+                        <p>${order.person.email}</p>
+                        <p>${order.person.address.city}</p>
+                        <p>${order.person.address.state}</p>
+                        <p>${order.person.address.country}</p>
+                        <p>${order.person.address.zipcode}</p>                                    
+                </div></div></td>
+                				       
 				
                 </c:forEach>
             	</table>

@@ -55,9 +55,9 @@
 
 		</tr>
 		<c:forEach var="person" items="${person}">
-
+         
 			<tr>
-
+               
 				<td>${person.email}</td>
 				<td>${person.firstName}</td>
 				<td>${person.lastName}</td>
@@ -73,8 +73,8 @@
                 </div>
 					</div>
 				</td>                
-				<security:authorize access="hasRole('ADMIN')">
-					<td><a href="persons/${person.id}">edit</a></td>
+				<security:authorize access="hasRole('ADMIN')">				
+					<td><a href="persons/${person.id}">edit</a></td> 
 					<td><form action="/delete/${person.id}" method="post">
 							<input type="submit" value="delete">
 						</form></td>

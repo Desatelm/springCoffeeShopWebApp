@@ -20,17 +20,26 @@ import javax.persistence.TemporalType;
 @Table(name = "OrderTable")
 public class Order {
 
+	
+
 	@Id
 	@GeneratedValue
 	private int id;
 	@Temporal(TemporalType.DATE)
-	private Date orderDate;
+	private Date orderDate ;
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Orderline> orderLines = new ArrayList<Orderline>();
 	@OneToOne
 	private Person person;
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setOrderLines(List<Orderline> orderLines) {
+		this.orderLines = orderLines;
+	}
 	public int getId() {
 		return id;
 	}
@@ -52,7 +61,7 @@ public class Order {
 	}
 
 	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
+		this.orderDate = new Date();
 	}
 
 	public int getQuantity() {

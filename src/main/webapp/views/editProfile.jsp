@@ -7,7 +7,7 @@
 </head>
 <body>
 
-	<form action="../updateProfile/${person.id}" method="post"
+	<form action="../personUpdate/${person.id}" method="post"
 		class="form-group">
 
 		<table>
@@ -23,16 +23,15 @@
 					value="${person.lastName}" class="form-control" /></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="email"
-					value="${pageContext.request.userPrincipal.name}"
+				<td>Email:</td>
+				<td><input type="text" name="email" value="${person.email}"
 					class="form-control" /></td>
 			</tr>
-
 			<tr>
 				<td>Phone:</td>
 				<td><input type="text" name="phone" value="${person.phone}"
 					class="form-control" /></td>
-			</tr>
+			</tr>			
 			<tr>
 				<td>City:</td>
 				<td><input type="text" name="city"

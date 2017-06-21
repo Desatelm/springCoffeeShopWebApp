@@ -2,6 +2,7 @@ package edu.mum.coffee;
 
 import static org.junit.Assert.fail;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class OrderServiceTest {
 
 		for (int i = 0; i < TEST_NumberOfOrders; i++) {
 			Order order = new Order();
-			order.setOrderDate(new Date());
+			//order.setOrderDate(new LocalDate(1, 4, 6));
 			order.setPerson(testPerson[countPerson++ % TEST_NumberOfPersons]);
 
 			for (int l = 0; l < TEST_NumberOfOrderLines; l++) {
