@@ -35,8 +35,8 @@
 	<security:authorize access="hasRole('ADMIN')">
 		<a href="addProduct"> Add a Product</a>|
 		<a href="../person"> List Of Customers</a>|
-		<a href="addProduct">Order Lines</a>
-		<a href="../order">Order</a>
+		<a href="../order">Order Lists</a>
+		
 	</security:authorize>
 	
 	<security:authorize access="hasRole('USER')">

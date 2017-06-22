@@ -66,34 +66,73 @@ public class OrderController {
 		 totalPrice += orderline.getPrice();
 		 totalQuantity += orderline.getQuantity();
 		}
+		totalPrice *= totalQuantity;
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("totalQuantity", totalQuantity);
 		return "Order_lines";
 	}
-
+	@GetMapping(value = "/orderLine")
+	public String Orderlines( Model model, @ModelAttribute("order")Order order) {
+		double totalPrice = 0;
+		int totalQuantity = 0;
+		
+		model.addAttribute("order_lines", order.getOrderLines());
+		for (Orderline orderline: order.getOrderLines()){
+		 totalPrice += orderline.getPrice();
+		 totalQuantity += orderline.getQuantity();
+		}
+		totalPrice *= totalQuantity;
+		model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("totalQuantity", totalQuantity);
+		return "Order_lines";
+	}
 	@PostMapping(value = "/addToCart")
-	public ModelAndView addToCart(Model mod, @ModelAttribute("order")Order order, Orderline orderline, Product product) {
+	public String addToCart(@RequestParam String email, Model mod, @ModelAttribute("order")Order order, Orderline orderline, Product product) {
 				
 		orderline.setProduct(product);
 		orderline.setOrder(order);
 		order.addOrderLine(orderline);
-		System.out.println(orderline.getPrice());
+		List<Person> person = personService.findByEmail(email);		
+		order.setPerson(person.get(0));
+		order.setOrderDate(new Date());
 		mod.addAttribute("order", order);
+		
+		
+		return "redirect:/orderLine";
+	}
+
+	@PostMapping(value = "/shopping")
+	public ModelAndView addToCart(Model mod, @ModelAttribute("order")Order order, Orderline orderline, Product product) {
+				
+		
 		ModelAndView model = new ModelAndView("welcome");		
-		System.out.println(order.getOrderLines().size());
 		model.addObject("products", productService.getAllProduct());
-		//orderService.save(order);
+		
 		return model;
 	}
 
 	@PostMapping(value = "/order")
-	public String addOrder(@RequestParam String email, HttpSession session,@ModelAttribute("order")Order order) {
+	public ModelAndView addOrder(@RequestParam String email,@ModelAttribute("order")Order order) {
 		List<Person> person = personService.findByEmail(email);		
 		order.setPerson(person.get(0));
 		order.setOrderDate(new Date());	
 		System.out.println(order.getOrderLines().size());
+		
+		ModelAndView model = new ModelAndView("shoppingReciept");
+		model.addObject("order_lines", order.getOrderLines());
+		model.addObject("order", order);
+		
+		
+		double totalPrice = 0;
+		int totalQuantity = 0;
+		for (Orderline orderline: order.getOrderLines()){
+		 totalPrice += orderline.getPrice();
+		 totalQuantity += orderline.getQuantity();
+		}
+		totalPrice *= totalQuantity;
+		model.addObject("totalPrice", totalPrice);
+		model.addObject("totalQuantity", totalQuantity);
 		orderService.save(order);
-		//session.invalidate();
-		return "redirect:/order";
+		return model;
 	}
 }

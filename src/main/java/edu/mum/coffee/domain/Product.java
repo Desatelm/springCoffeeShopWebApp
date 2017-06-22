@@ -9,6 +9,10 @@ import javax.persistence.Id;
 @Entity
 public class Product {
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Id
 	@GeneratedValue
 	private int id;

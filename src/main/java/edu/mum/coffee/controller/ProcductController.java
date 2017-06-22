@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.mum.coffee.domain.Order;
 import edu.mum.coffee.domain.Product;
 import edu.mum.coffee.domain.ProductType;
+import edu.mum.coffee.service.OrderService;
 import edu.mum.coffee.service.ProductService;
 
 /**
@@ -24,6 +26,8 @@ import edu.mum.coffee.service.ProductService;
 public class ProcductController {
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private OrderService orderService; 
 
 	@GetMapping({ "success" })
 
@@ -51,6 +55,9 @@ public class ProcductController {
 	
 	@RequestMapping(value = "deleteProduct/{id}", method = RequestMethod.POST)
 	public String deleteProduct(@PathVariable int id) {
+		for (Order order:orderService.findByProduct(productService.getProduct(id))){
+			orderService.delete(order);
+		}		
 		productService.delete( productService.getProduct(id));
 		return "redirect:/";
 	}	
@@ -64,8 +71,12 @@ public class ProcductController {
 	@RequestMapping(value = "updateProduct/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable("id") int productId,  Product product,ProductType productType) {
 		Product pro = productService.getProduct(productId);
-		pro = product;
+		System.out.println(pro.getId());
+		System.out.println(pro.getPrice());
+		pro = product;		
+		System.out.println(pro.getId());
 		pro.setProductType(productType);
+		System.out.println(pro.getId());
 	    productService.save(pro);
 	    return "redirect:/";
 	}

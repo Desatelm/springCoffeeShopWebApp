@@ -49,19 +49,17 @@
 						</select> <br />
 						<div class='text-center'>
 							Quantity:<input type="text" name="quantity" class="form-control" />
-							<input type="hidden" name="email"
-								value="${pageContext.request.userPrincipal.name}" /> <input
+							<input type="hidden" name="email" value="${pageContext.request.userPrincipal.name}" /> <input
 								type='submit' id='postSubmit' class='btn-primary' class='btn-lg'
 								value='AddToCart'>
 						</div>
 					</fieldset>
 				</form>
-				<form action="/order/" method="post">
+				<%-- <form action="/order/" method="post">
 				<input type="hidden" name="email" value="${pageContext.request.userPrincipal.name}"/>
-							<input type="submit" value="Order">
-			</form>
+							<input type="submit" class='btn-primary' class='btn-lg' value="Order">
+			</form> --%>
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+</body></html>

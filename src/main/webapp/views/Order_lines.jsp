@@ -30,9 +30,9 @@
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
 		 ${pageContext.request.userPrincipal.name}
                 <a href="<c:url value="/logout" />"> Logout</a>|
-	</c:if>		
-	
-	
+	</c:if>
+
+
 	<table
 		class="table table-striped, table table-hover table table-condensed table-bordered">
 		<tr>
@@ -41,34 +41,51 @@
 			<th>Order Id</th>
 			<th>customer Name</th>
 			<th>Product</th>
-			<th>Quantity</th>	
-            <th>Price</th>
+			<th>Quantity</th>
+			<th>Price</th>
 		</tr>
 		<c:forEach var="order_line" items="${order_lines}">
 
 			<tr>
-				<td>${order_line.id}</td>	<!-- order id -->				    
-				<td>${order_line.order.id}</td>				               
-                <td>${order_line.order.person.firstName}</td>
+				<td>${order_line.id}</td>
+				<!-- order id -->
+				<td>${order_line.order.orderDate}</td>
+				<td>${order_line.order.person.firstName}</td>
+
+				<td><div class="dropdown">
+						<!-- product  -->
+						<p>
+						<p>${order_line.product.productName}</p>
+						<div class="dropdown-content">
+
+							<p>${order_line.product.productType}</p>
+							<p>${order_line.product.description}</p>
+						</div>
+					</div></td>
+				<td>${order_line.quantity}</td>
 				
-				    <td><div class="dropdown">   <!-- product  -->
-						<p><p>${order_line.product.productName}</p>
-						<div class="dropdown-content">               
-                        
-                        <p>${order_line.product.productType}</p>
-                        <p>${order_line.product.description}</p>                                                     
-                </div>
-					</div></td> 
-					<td>${order_line.quantity}</td> <!-- quantity -->  
-					<td>${order_line.product.price}</td>      
-				</tr>
-                </c:forEach>
-                <tr>
-                <td colspan="4">Total</td>
-                 <td>${totalQuantity}</td>
-                <td >${totalPrice}</td>
-               
-                </tr>
-            	</table>
+				<td>${order_line.product.price}</td>
+			</tr>
+		</c:forEach>
+		<tr>
+			<td colspan="4">Total</td>
+			<td>${totalQuantity}</td>
+			<td>${totalPrice}</td>
+		</tr>
+	</table>
+	<security:authorize access="hasRole('USER')">
+	<div class="pull-right">
+		<form action="/shopping" method="post">
+			<input type="submit" class='btn-primary' class='btn-lg'
+				value=">>>continue shopping">
+		</form>
+	</div>
+	<form action="/order/" method="post">
+		<input type="hidden" name="email"
+			value="${pageContext.request.userPrincipal.name}" /> <input
+			type="submit" class='btn-primary' class='btn-lg' value="Order">
+	</form>
+</security:authorize>
+
 </body>
 </html>
