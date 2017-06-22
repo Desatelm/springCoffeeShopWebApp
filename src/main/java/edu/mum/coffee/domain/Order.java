@@ -18,13 +18,13 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "OrderTable")
-public class Order {	
+public class Order {
 
 	@Id
 	@GeneratedValue
 	private int id;
 	@Temporal(TemporalType.DATE)
-	private Date orderDate ;
+	private Date orderDate;
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Orderline> orderLines = new ArrayList<Orderline>();
@@ -38,6 +38,7 @@ public class Order {
 	public void setOrderLines(List<Orderline> orderLines) {
 		this.orderLines = orderLines;
 	}
+
 	public int getId() {
 		return id;
 	}

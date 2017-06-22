@@ -24,7 +24,7 @@ import edu.mum.coffee.service.ProductService;
 public class ProcductRestController {
 	@Autowired
 	private ProductService productService;
-	
+
 	@GetMapping(value = "Rest/product")
 	public List<Product> getAll() {
 		return productService.getAllProduct();

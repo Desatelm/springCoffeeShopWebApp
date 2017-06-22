@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -39,6 +38,7 @@ body {
 	
 	<div class=' container-fluid well col-xs-8' >
 		<form action="/addProduct" method="post">
+		
 			<fieldset>
 				<legend> add Product</legend>
 				Product Name:<input type="text" name="productName"

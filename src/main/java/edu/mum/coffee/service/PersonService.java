@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.coffee.domain.Person;
-import edu.mum.coffee.domain.Product;
 import edu.mum.coffee.repository.PersonRepository;
 
 @Service
@@ -24,14 +23,15 @@ public class PersonService {
 	public List<Person> findByEmail(String email) {
 		return personRepository.findByEmail(email);
 	}
+
 	public List<Person> getAll() {
-		return  personRepository.findAll() ;
+		return personRepository.findAll();
 	}
 
 	public Person findById(Long id) {
 		return personRepository.findOne(id);
 	}
-	
+
 	public Person update(Person person) {
 		return personRepository.save(person);
 	}

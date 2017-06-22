@@ -2,6 +2,7 @@
  * 
  */
 package edu.mum.coffee.wsController;
+
 /**
  * @author destalem
  *
@@ -17,14 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.mum.coffee.domain.Order;
 import edu.mum.coffee.service.OrderService;
 
-
 @RestController
 public class OrderRestController {
-	
+
 	@Autowired
 	private OrderService orderService;
 
-	
 	@GetMapping(value = "Rest/order")
 	public List<Order> getAll() {
 		return orderService.findAll();

@@ -4,8 +4,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,7 +16,7 @@ public class Orderline {
 	@GeneratedValue
 	private int id;
 	private int quantity;
-	@OneToOne (cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Product product;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Order order;

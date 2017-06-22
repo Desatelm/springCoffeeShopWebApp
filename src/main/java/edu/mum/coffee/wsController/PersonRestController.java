@@ -21,11 +21,10 @@ import edu.mum.coffee.service.PersonService;
 
 @RestController
 public class PersonRestController {
-	
+
 	@Autowired
 	private PersonService personService;
 
-	
 	@GetMapping(value = "Rest/email")
 	public List<Person> getAll() {
 		return personService.getAll();
@@ -49,6 +48,5 @@ public class PersonRestController {
 		per = person;
 		return personService.savePerson(per);
 	}
-
 
 }

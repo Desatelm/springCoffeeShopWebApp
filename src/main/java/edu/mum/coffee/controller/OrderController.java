@@ -10,8 +10,6 @@ import java.util.Date;
  */
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,9 +48,9 @@ public class OrderController {
 
 	@GetMapping(value = "/placeOrder/{id}")
 	public String placeOrder(Model model, @PathVariable int id) {
-		if(!model.containsAttribute("order")) {
-		      model.addAttribute("order", new Order());
-		    }
+		if (!model.containsAttribute("order")) {
+			model.addAttribute("order", new Order());
+		}
 		model.addAttribute("product", productService.getProduct(id));
 		return "placeOrder";
 	}
@@ -62,72 +60,72 @@ public class OrderController {
 		double totalPrice = 0;
 		int totalQuantity = 0;
 		model.addAttribute("order_lines", orderService.findById(id).getOrderLines());
-		for (Orderline orderline: orderService.findById(id).getOrderLines()){
-		 totalPrice += orderline.getPrice();
-		 totalQuantity += orderline.getQuantity();
+		for (Orderline orderline : orderService.findById(id).getOrderLines()) {
+			totalPrice += orderline.getPrice();
+			totalQuantity += orderline.getQuantity();
 		}
 		totalPrice *= totalQuantity;
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("totalQuantity", totalQuantity);
 		return "Order_lines";
 	}
+
 	@GetMapping(value = "/orderLine")
-	public String Orderlines( Model model, @ModelAttribute("order")Order order) {
+	public String Orderlines(Model model, @ModelAttribute("order") Order order) {
 		double totalPrice = 0;
 		int totalQuantity = 0;
-		
+
 		model.addAttribute("order_lines", order.getOrderLines());
-		for (Orderline orderline: order.getOrderLines()){
-		 totalPrice += orderline.getPrice();
-		 totalQuantity += orderline.getQuantity();
+		for (Orderline orderline : order.getOrderLines()) {
+			totalPrice += orderline.getPrice();
+			totalQuantity += orderline.getQuantity();
 		}
 		totalPrice *= totalQuantity;
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("totalQuantity", totalQuantity);
 		return "Order_lines";
 	}
+
 	@PostMapping(value = "/addToCart/{id}")
-	public String addToCart(@RequestParam String email, Model mod, @ModelAttribute("order")Order order, Orderline orderline, @PathVariable int id) {
+	public String addToCart(@RequestParam String email, Model mod, @ModelAttribute("order") Order order,
+			Orderline orderline, @PathVariable int id) {
 		Product product = productService.getProduct(id);
-		
+
 		orderline.setProduct(product);
 		orderline.setOrder(order);
 		order.addOrderLine(orderline);
-		List<Person> person = personService.findByEmail(email);		
+		List<Person> person = personService.findByEmail(email);
 		order.setPerson(person.get(0));
 		order.setOrderDate(new Date());
 		mod.addAttribute("order", order);
-		
-		
+
 		return "redirect:/orderLine";
 	}
 
 	@PostMapping(value = "/shopping")
 	public ModelAndView addToCart() {
-				
-		
-		ModelAndView model = new ModelAndView("welcome");		
+
+		ModelAndView model = new ModelAndView("welcome");
 		model.addObject("products", productService.getAllProduct());
-		
+
 		return model;
 	}
 
 	@PostMapping(value = "/order")
-	public ModelAndView addOrder(@RequestParam String email,@ModelAttribute("order")Order order) {
-		List<Person> person = personService.findByEmail(email);		
+	public ModelAndView addOrder(@RequestParam String email, @ModelAttribute("order") Order order) {
+		List<Person> person = personService.findByEmail(email);
 		order.setPerson(person.get(0));
-		order.setOrderDate(new Date());			
-		
+		order.setOrderDate(new Date());
+
 		ModelAndView model = new ModelAndView("shoppingReciept");
 		model.addObject("order_lines", order.getOrderLines());
 		model.addObject("order", order);
-		
-		
+
 		double totalPrice = 0;
 		int totalQuantity = 0;
-		for (Orderline orderline: order.getOrderLines()){
-		 totalPrice += orderline.getPrice();
-		 totalQuantity += orderline.getQuantity();
+		for (Orderline orderline : order.getOrderLines()) {
+			totalPrice += orderline.getPrice();
+			totalQuantity += orderline.getQuantity();
 		}
 		totalPrice *= totalQuantity;
 		model.addObject("totalPrice", totalPrice);

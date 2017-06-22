@@ -1,7 +1,5 @@
 package edu.mum.coffee.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.RestTemplate;
 
 import edu.mum.coffee.domain.Order;
 import edu.mum.coffee.domain.Product;
@@ -28,7 +25,7 @@ public class ProcductController {
 	@Autowired
 	private ProductService productService;
 	@Autowired
-	private OrderService orderService; 
+	private OrderService orderService;
 
 	@GetMapping({ "success" })
 
@@ -38,22 +35,23 @@ public class ProcductController {
 	}
 
 	@GetMapping(value = "/")
-	public String getAll(Model model) {		
-		
+	public String getAll(Model model) {
+
 		model.addAttribute("products", productService.getAllProduct());
-		
+
 		return "welcome";
 	}
-	/*@GetMapping(value = "pro")
-	public String get(Model model) {		
-		RestTemplate restTemp = new RestTemplate();
-		List <Product> pros = restTemp.getForObject("http://localhost:7088/Rest/product", ArrayList.class);
-		model.addAttribute("products",pros);
-		return "welcome";
-	}*/	
-	
+	/*
+	 * @GetMapping(value = "/") public String get(Model model) {
+	 * 
+	 * RestTemplate restTemp = new RestTemplate(); List <Product> pros =
+	 * restTemp.getForObject("http://localhost:7088/Rest/product/",
+	 * ArrayList.class); model.addAttribute("products",pros); return "welcome";
+	 * }
+	 */
+
 	@GetMapping(value = "/addProduct")
-	public String addProduct(Model model) {			
+	public String addProduct(Model model) {
 		return "addProduct";
 	}
 
@@ -63,16 +61,17 @@ public class ProcductController {
 		productService.save(product);
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping(value = "deleteProduct/{id}", method = RequestMethod.POST)
 	public String deleteProduct(@PathVariable int id) {
-		for (Order order:orderService.findByProduct(productService.getProduct(id))){
+		for (Order order : orderService.findByProduct(productService.getProduct(id))) {
 			orderService.delete(order);
-		}		
-		productService.delete( productService.getProduct(id));
-			
+		}
+		productService.delete(productService.getProduct(id));
+
 		return "redirect:/";
-	}	
+	}
+
 	@RequestMapping(value = "editProduct/{id}", method = RequestMethod.POST)
 	public String editProduct(Model model, @PathVariable("id") int productId) {
 		Product product = productService.getProduct(productId);
@@ -81,16 +80,16 @@ public class ProcductController {
 	}
 
 	@RequestMapping(value = "updateProduct/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable("id") int productId,  Product product,ProductType productType) {
+	public String update(@PathVariable("id") int productId, Product product, ProductType productType) {
 		Product pro = productService.getProduct(productId);
 		System.out.println(pro.getId());
 		System.out.println(pro.getPrice());
-		pro = product;		
+		pro = product;
 		System.out.println(pro.getId());
 		pro.setProductType(productType);
 		System.out.println(pro.getId());
-	    productService.save(pro);
-	    return "redirect:/";
+		productService.save(pro);
+		return "redirect:/";
 	}
 
 }

@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Product {	
+public class Product {
 
 	@Id
 	@GeneratedValue
@@ -17,8 +17,8 @@ public class Product {
 	private double price;
 	@Enumerated(EnumType.STRING)
 	private ProductType productType;
-    private String img;
-    
+	private String img;
+
 	public String getImg() {
 		return img;
 	}
@@ -38,9 +38,11 @@ public class Product {
 		this.price = price;
 		this.productType = productType;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public ProductType getProductType() {
 		return productType;
 	}

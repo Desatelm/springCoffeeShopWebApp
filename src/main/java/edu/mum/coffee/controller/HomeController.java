@@ -5,16 +5,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
-	
-	@GetMapping({"/index", "/home"})
+
+	@GetMapping({ "/index", "/home" })
 	public String homePage() {
 		return "home";
 	}
 
-	@GetMapping({"/secure"})
+	@GetMapping({ "/secure" })
 	public String securePage() {
 		return "secure";
 	}
-	
-	
+
 }
