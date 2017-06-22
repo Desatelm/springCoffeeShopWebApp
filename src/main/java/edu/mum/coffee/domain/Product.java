@@ -7,11 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Product {
-
-	public void setId(int id) {
-		this.id = id;
-	}
+public class Product {	
 
 	@Id
 	@GeneratedValue
@@ -21,6 +17,15 @@ public class Product {
 	private double price;
 	@Enumerated(EnumType.STRING)
 	private ProductType productType;
+    private String img;
+    
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
 
 	public Product() {
 		super(); // default constructor
@@ -33,7 +38,9 @@ public class Product {
 		this.price = price;
 		this.productType = productType;
 	}
-
+	public void setId(int id) {
+		this.id = id;
+	}
 	public ProductType getProductType() {
 		return productType;
 	}

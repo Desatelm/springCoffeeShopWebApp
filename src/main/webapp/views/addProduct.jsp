@@ -24,37 +24,43 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
+<style>
+body {
+	background-image: url("/images/img5.jpe");
+	background-color: #cccccc;
+}
+</style>
 </head>
 <body>
-	<div class='container' >
-		<div class='container raw'>
-			<div class=' container-fluid well col-xs-3'
-				style="margin-right: 25px;">
-				<form action = "/addProduct" method = "post">
-				<fieldset>
-					<legend> add Product</legend>
-					Product Name:<input type="text" name="productName"
-						class="form-control" /> 
-						Price:<input type="text" name="price"
-						class="form-control" />
-					<textarea class='form-control' name='description'
-						id='offersTextArea' style="margin-bottom: 25px;" rows="6">
+	<div class='container'>
+		<h1 style="color: blue;">
+			Ethio-Coffee <small style="color: blue;">|Add Product!!</small>
+		</h1>
+	
+	<div class=' container-fluid well col-xs-8' >
+		<form action="/addProduct" method="post">
+			<fieldset>
+				<legend> add Product</legend>
+				Product Name:<input type="text" name="productName"
+					class="form-control" /> Price:<input type="text" name="price"
+					class="form-control" />
+				<textarea class='form-control' name='description'
+					id='offersTextArea' style="margin-bottom: 25px;" rows="6">
 				                Enter Coffee description				
 			                 </textarea>
-					<select name="productType">						
-							<option value="BREAKFAST">BREAKFAST</option>
-							<option value="LUNCH">LUNCH</option>
-							<option value="DINNER">DINNER</option>						
-					</select>					
+				<select name="productType">
+					<option value="BREAKFAST">BREAKFAST</option>
+					<option value="LUNCH">LUNCH</option>
+					<option value="DINNER">DINNER</option>
+				</select>
 
-					<div class='text-center'>
-						<input type='submit' id='postSubmit' class='btn-primary'
-							class='btn-lg' value='ADD PRODUCT'>
-					</div>
-				</fieldset>
-				</form>
-			</div>
-		</div>
+				<div class='text-center' style="margin-top:25px;">
+					<input type='submit' id='postSubmit' class='btn-primary'
+						class='btn-lg' value='ADD PRODUCT'>
+				</div>
+			</fieldset>
+		</form>
 	</div>
-</body>
+	</div>
+	</body>
 </html>

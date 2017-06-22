@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 
 import edu.mum.coffee.domain.Order;
 import edu.mum.coffee.domain.Product;
@@ -38,9 +39,19 @@ public class ProcductController {
 
 	@GetMapping(value = "/")
 	public String getAll(Model model) {		
+		
 		model.addAttribute("products", productService.getAllProduct());
+		
 		return "welcome";
 	}
+	/*@GetMapping(value = "pro")
+	public String get(Model model) {		
+		RestTemplate restTemp = new RestTemplate();
+		List <Product> pros = restTemp.getForObject("http://localhost:7088/Rest/product", ArrayList.class);
+		model.addAttribute("products",pros);
+		return "welcome";
+	}*/	
+	
 	@GetMapping(value = "/addProduct")
 	public String addProduct(Model model) {			
 		return "addProduct";
@@ -59,6 +70,7 @@ public class ProcductController {
 			orderService.delete(order);
 		}		
 		productService.delete( productService.getProduct(id));
+			
 		return "redirect:/";
 	}	
 	@RequestMapping(value = "editProduct/{id}", method = RequestMethod.POST)

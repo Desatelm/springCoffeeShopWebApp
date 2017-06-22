@@ -5,6 +5,7 @@ C:\Users\hp\Documents\springCoffeeShopWebApp\src\main\java\edu\mum\coffee\domain
 C:\Users\hp\Documents\springCoffeeShopWebApp\src\main\java\edu\mum\coffee\service\OrderService.java
 C:\Users\hp\Documents\springCoffeeShopWebApp\src\main\java\edu\mum\coffee\controller\PersonController.java
 C:\Users\hp\Documents\springCoffeeShopWebApp\src\main\java\edu\mum\coffee\wsController\PersonRestController.java
+C:\Users\hp\Documents\springCoffeeShopWebApp\src\main\java\edu\mum\coffee\wsController\DaoConfig.java
 C:\Users\hp\Documents\springCoffeeShopWebApp\src\main\java\edu\mum\coffee\config\WebSecurityConfig.java
 C:\Users\hp\Documents\springCoffeeShopWebApp\src\main\java\edu\mum\coffee\repository\OrderRepository.java
 C:\Users\hp\Documents\springCoffeeShopWebApp\src\main\java\edu\mum\coffee\wsController\ProcductRestController.java

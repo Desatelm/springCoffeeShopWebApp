@@ -18,7 +18,7 @@ public class Orderline {
 	@GeneratedValue
 	private int id;
 	private int quantity;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne (cascade = CascadeType.PERSIST)
 	private Product product;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Order order;

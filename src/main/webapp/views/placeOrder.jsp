@@ -27,39 +27,43 @@
 </head>
 <body>
 	<div class='container'>
-		<div class='container raw'>
-			<div class=' container-fluid well col-xs-3'
-				style="margin-right: 25px;">
-				<form action="/addToCart" method="post">
+		<h1 >
+			Ethio-Coffee <small >|Place Order!!</small>
+		</h1>
+			
+			<div class=' container-fluid well col-xs-6' >
+				<form action="/addToCart/${product.id}" method="post">
 					<fieldset>
 						<legend> Order</legend>
-						Product Name:<input type="text" name="productName"
-							value="${product.productName}" readonly class="form-control" />
-						Price:<input type="text" name="price" value="${product.price}"
-							class="form-control" readonly />
-						<textarea class='form-control' name='description'
+						<div class="form-group"><label class="col-lg-3 control-label">Product Name:
+						</label><input type="text" name="productName"
+							value="${product.productName}" readonly class="form-control col-lg-2" /></div>
+					    
+					     <div class="form-group"><label class="col-lg-3 control-label">Price:</label> 
+					     <input type="text" name="price" value="${product.price}"
+							class="form-control" readonly /></div>
+						<div class="form-group"><label class="col-lg-3 control-label">Description:</label><textarea class='form-control' name='description'
 							id='offersTextArea' style="margin-bottom: 25px;" rows="6"
 							readonly>
 				                ${product.description}			
-			                 </textarea>
+			                 </textarea></div>
 						<select name="productType">
 							<option value="BREAKFAST">BREAKFAST</option>
 							<option value="LUNCH">LUNCH</option>
 							<option value="DINNER">DINNER</option>
-						</select> <br />
-						<div class='text-center'>
-							Quantity:<input type="text" name="quantity" class="form-control" />
-							<input type="hidden" name="email" value="${pageContext.request.userPrincipal.name}" /> <input
-								type='submit' id='postSubmit' class='btn-primary' class='btn-lg'
+						</select> 						
+							<div class="form-group"><label class="col-lg-3 control-label">Quantity:</label>
+							<input type="text" name="quantity" class="form-control" style="margin-top:25px;"/></div>
+							<div class='text-center' style="margin-top:25px;">
+							<input type="hidden" name="email" value="${pageContext.request.userPrincipal.name}" /> 
+							
+							<input type='submit' id='postSubmit' class='btn-primary' class='btn-lg'
 								value='AddToCart'>
+								</div>
 						</div>
 					</fieldset>
 				</form>
-				<%-- <form action="/order/" method="post">
-				<input type="hidden" name="email" value="${pageContext.request.userPrincipal.name}"/>
-							<input type="submit" class='btn-primary' class='btn-lg' value="Order">
-			</form> --%>
 			</div>
-		</div>
+		
 	</div>
 </body></html>

@@ -86,9 +86,10 @@ public class OrderController {
 		model.addAttribute("totalQuantity", totalQuantity);
 		return "Order_lines";
 	}
-	@PostMapping(value = "/addToCart")
-	public String addToCart(@RequestParam String email, Model mod, @ModelAttribute("order")Order order, Orderline orderline, Product product) {
-				
+	@PostMapping(value = "/addToCart/{id}")
+	public String addToCart(@RequestParam String email, Model mod, @ModelAttribute("order")Order order, Orderline orderline, @PathVariable int id) {
+		Product product = productService.getProduct(id);
+		
 		orderline.setProduct(product);
 		orderline.setOrder(order);
 		order.addOrderLine(orderline);
@@ -102,7 +103,7 @@ public class OrderController {
 	}
 
 	@PostMapping(value = "/shopping")
-	public ModelAndView addToCart(Model mod, @ModelAttribute("order")Order order, Orderline orderline, Product product) {
+	public ModelAndView addToCart() {
 				
 		
 		ModelAndView model = new ModelAndView("welcome");		
@@ -115,8 +116,7 @@ public class OrderController {
 	public ModelAndView addOrder(@RequestParam String email,@ModelAttribute("order")Order order) {
 		List<Person> person = personService.findByEmail(email);		
 		order.setPerson(person.get(0));
-		order.setOrderDate(new Date());	
-		System.out.println(order.getOrderLines().size());
+		order.setOrderDate(new Date());			
 		
 		ModelAndView model = new ModelAndView("shoppingReciept");
 		model.addObject("order_lines", order.getOrderLines());

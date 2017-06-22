@@ -22,19 +22,33 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
 </head>
-<body onload='document.f.username.focus();'>
+<body >
+<div class='container' >
+		<h1>Thank You for Shopping</h1>
+		<div class='container'>
+			<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand active">OnlineCoffeeShop</a>
+				</div>
 
-	<h1>Order Lines</h1>
 
-	<div class="clearfix"></div>
-	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		 ${pageContext.request.userPrincipal.name}
-                <a href="<c:url value="/logout" />"> Logout</a>|
-	</c:if>
-	<div class='container'>
-		<div class='container raw'>
-			<div class=' container-fluid well col-xs-3'
-				style="margin-right: 25px;">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="<c:url value="/" />"><span
+							class="glyphicon glyphicon glyphicon-home"></span> Home</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+							<c:if test="${pageContext.request.userPrincipal.name != null}">
+		                ${pageContext.request.userPrincipal.name}</c:if></a></li>
+					<li><a href="<c:url value="/logout" />"><span
+							class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				</ul>
+
+			</div>
+			</nav>
+		</div>
+		
+	<div class='container' style="margin-left:75px;">		
+			<div class=' container-fluid well col-xs-8'	>
 				<fieldset>
 					<legend> Reciept</legend>
 					<p>Order Id: ${order.id}</p>
@@ -71,9 +85,7 @@
 			</div>
 		</div>
 	</div>
-
-
-
+  
 
 </body>
 </html>

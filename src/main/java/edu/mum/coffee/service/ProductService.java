@@ -1,5 +1,6 @@
 package edu.mum.coffee.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import edu.mum.coffee.repository.ProductRepository;
 @Service
 @Transactional
 public class ProductService   {
-	
+	String[] imageUrls = {"/images/img.jpe", "/images/img2.jpe",
+			                  "/images/img1.jpe","/images/download.jpe",
+			                  "/images/images.jpe", "/images/images1.jpe"};
 	@Autowired
 	private ProductRepository productRepository;
 		
@@ -30,7 +33,19 @@ public class ProductService   {
 	}
 
 	public List<Product> getAllProduct() {
-		return  productRepository.findAll() ;
+		 List<Product> products = productRepository.findAll();
+		 List<Product> productt = new ArrayList<>();
+		 int cnt = 0;
+		 for(Product product: products){
+			 if(cnt < imageUrls.length){
+				 product.setImg(imageUrls[cnt]);
+				 productt.add(product);
+				 cnt++;
+			 }else{
+				 cnt = 0;				 
+			 }
+		 }
+		return   productt ;
 	}
 	
 	public List<Product> findByTextSearch(String criteria) {
